@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import MultiStepForm from './components/MultiStepForm';
 import { ClientForm } from './components/steps/ClientForm';
 import { ContactForm } from './components/steps/ContactForm';
 import { EventForm } from './components/steps/EventForm';
-import { QuoteForm } from './components/steps/QuoteForm';
+import QuoteForm from './components/steps/QuoteForm';
+import MultiStepForm from './components/MultiStepForm';
 import SuccessScreen from './components/SuccessScreen';
+
 import axios from 'axios';
 
 function App() {
@@ -30,45 +31,33 @@ function App() {
 	});
 
 	const [quoteData, setQuoteData] = useState({
-		offer2hr: '',
-		offer3hr: '',
-		offer4hr: '',
-		offer5hr: '',
-		extraDigitalAlbum: '',
-		extraMonitor: '',
-		extraBoomerangs: '',
-		extraUsb: '',
-		extraScrapBook: '',
-		extraPremiumTemplate: '',
-		extraHashtag: '',
-		extraGreenScreen: '',
-		extraDebranding: '',
-		extraPrivacy: '',
-		extraSecondBooth: '',
-		extraMetroArea: '',
-		extraOutsideMetroArea: '',
-		extraEastSouthArea: '',
-		extraCenterWestArea: '',
+		offer: '',
 	});
 
 	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
-	const [submittedFormData, setSubmittedFormData] = useState({});
-
 	const updateClientFields = (updatedFields) => {
+		console.log('Updating quote fields:', updatedFields);
 		setClientData({ ...clientData, ...updatedFields });
 	};
 
 	const updateEventFields = (updatedFields) => {
 		setEventData({ ...eventData, ...updatedFields });
+		console.log('Updating quote fields:', updatedFields);
 	};
 
 	const updateContactFields = (updatedFields) => {
+		console.log('Updating contact fields:', updatedFields);
 		setContactData({ ...contactData, ...updatedFields });
 	};
 
 	const updateQuoteFields = (updatedFields) => {
+		console.log('Updating quote fields:', updatedFields);
 		setQuoteData({ ...quoteData, ...updatedFields });
+	};
+
+	const canProceed = () => {
+		return quoteData.offer !== '';
 	};
 
 	const steps = [
@@ -76,82 +65,44 @@ function App() {
 			key="contact-form"
 			contactData={contactData}
 			updateFields={updateContactFields}
+			canProceed={() => true}
 		/>,
 		<ClientForm
 			key="client-form"
 			clientData={clientData}
 			updateFields={updateClientFields}
+			canProceed={() => true}
 		/>,
 		<EventForm
 			key="event-form"
 			eventData={eventData}
 			updateFields={updateEventFields}
+			canProceed={() => true}
 		/>,
 		<QuoteForm
 			key="quote-form"
 			quoteData={quoteData}
 			updateFields={updateQuoteFields}
+			canProceed={canProceed}
 		/>,
 	];
 
-	const resetForm = () => {
-		setContactData({
-			clientName: '',
-			clientPhoneNumber: '',
-			clientEmail: '',
-		});
-		setClientData({
-			clientName: '',
-			clientEmail: '',
-			clientPhone: '',
-			clientAddress: '',
-			clientOtherContact: '',
-			referal: '',
-		});
-		setEventData({
-			eventType: '',
-			eventDate: '',
-			eventLocation: '',
-			eventTime: '',
-			eventBoothLocation: '',
-			eventBoothTime: '',
-		});
-		setQuoteData({
-			offer2hr: '',
-			offer3hr: '',
-			offer4hr: '',
-			offer5hr: '',
-			extraDigitalAlbum: '',
-			extraMonitor: '',
-			extraBoomerangs: '',
-			extraUsb: '',
-			extraScrapBook: '',
-			extraPremiumTemplate: '',
-			extraHashtag: '',
-			extraGreenScreen: '',
-			extraDebranding: '',
-			extraPrivacy: '',
-			extraSecondBooth: '',
-			extraMetroArea: '',
-			extraOutsideMetroArea: '',
-			extraEastSouthArea: '',
-			extraCenterWestArea: '',
-		});
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const formData = {
+
+		const combinedData = {
 			...contactData,
 			...clientData,
 			...eventData,
 			...quoteData,
 		};
-		await axios.post('http://localhost:5000/api/forms', formData);
-		resetForm();
-
-		// Set submitted form data
-		setSubmittedFormData(formData);
+		console.log('Combined data:', combinedData);
+		try {
+			await axios.post('http://localhost:5000/api/forms', combinedData);
+			console.log('Form data submitted successfully');
+		} catch (error) {
+			console.error('Error submitting form data:', error);
+		}
 
 		// Show the success screen
 		setShowSuccessScreen(true);
@@ -168,7 +119,7 @@ function App() {
 		<div className="App">
 			<h1>Multi-Step Form</h1>
 			{showSuccessScreen ? (
-				<SuccessScreen data={combinedData} />
+				<SuccessScreen formData={combinedData} />
 			) : (
 				<MultiStepForm steps={steps} handleSubmit={handleSubmit} />
 			)}

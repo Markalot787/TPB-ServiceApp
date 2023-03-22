@@ -6,7 +6,9 @@ const Form = require('./formModel'); // Import the Form model
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' })); // Replace 'http://localhost:3000' with your client app's URL
+
 app.use(express.json());
 
 const mongoUri =
@@ -31,14 +33,9 @@ mongoose.connection.once('open', () => {
 });
 
 app.post('/api/forms', async (req, res) => {
-	const { contactData, clientData, eventData, quoteData } = req.body;
+	// Remove this line: const { contactData, clientData, eventData, quoteData } = req.body;
 
-	const newForm = new Form({
-		contactData,
-		clientData,
-		eventData,
-		quoteData,
-	});
+	const newForm = new Form(req.body); // Use the request body directly
 
 	try {
 		const savedForm = await newForm.save();
