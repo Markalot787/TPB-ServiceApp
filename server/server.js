@@ -12,7 +12,7 @@ app.use(cors({ origin: 'http://localhost:3000' })); // Replace 'http://localhost
 app.use(express.json());
 
 const mongoUri =
-	'mongodb+srv://mark_alot:23React42m.@cluster0.qd9ub.mongodb.net/myDatabase?retryWrites=true&w=majority';
+	'mongodb+srv://@cluster0.qd9ub.mongodb.net/myDatabase?retryWrites=true&w=majority';
 
 const connectToMongo = async () => {
 	try {
