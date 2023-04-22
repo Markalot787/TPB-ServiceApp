@@ -1,0 +1,159 @@
+/* FormBuilder.module.css */
+.wrapper {
+	background-color: #f2f2f2;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 20px;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 20px;
+	margin-bottom: 20px;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+button {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #2196f3;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+}
+
+.buttonlong {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #2196f3;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+button:hover {
+	background-color: #0d47a1;
+}
+
+.form-preview {
+	padding: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #f9f9f9;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal {
+	background-color: #fff;
+	padding: 2rem;
+	border-radius: 5px;
+	width: 80%;
+	max-width: 600px;
+	position: relative;
+}
+
+.cancelButton {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	border-radius: 5px;
+}
+
+.closeButton:hover {
+	background-color: #e57373;
+}
+
+.formList {
+	list-style-type: none;
+	padding: 0;
+}
+
+.formList li {
+	cursor: pointer;
+}
+
+.formList a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.even {
+	background-color: white;
+}
+
+.odd {
+	background-color: lightgrey;
+}
+
+.navigation {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.formPart {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.formsList {
+	flex: 1;
+}
+
+.formViewer {
+	flex: 3;
+	margin-left: 20px;
+}

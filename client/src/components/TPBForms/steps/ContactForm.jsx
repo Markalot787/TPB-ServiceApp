@@ -1,5 +1,22 @@
 import React from 'react';
 import { FormWrapper } from '../FormWrapper';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+const CustomInput = ({ value, onClick }) => (
+	<div
+		style={{
+			backgroundColor: 'yellow',
+			color: 'black',
+			cursor: 'pointer',
+			display: 'inline-block',
+			padding: '5px 10px',
+		}}
+		onClick={onClick}
+	>
+		{value || 'Select date'}
+	</div>
+);
 
 const ContactForm = ({
 	clientName,
@@ -10,6 +27,13 @@ const ContactForm = ({
 	eventLocation,
 	updateFields,
 }) => {
+	const [selectedDate, setSelectedDate] = React.useState(eventDate);
+
+	const handleDateChange = (date) => {
+		setSelectedDate(date);
+		updateFields({ eventDate: date?.toISOString().split('T')[0] });
+	};
+
 	return (
 		<FormWrapper title="Contact Details">
 			<label>Nombre/Compañía</label>
@@ -43,11 +67,12 @@ const ContactForm = ({
 				onChange={(e) => updateFields({ eventType: e.target.value })}
 			/>
 			<label>Fecha del Evento</label>
-			<input
+			<DatePicker
 				required
-				type="text"
-				value={eventDate}
-				onChange={(e) => updateFields({ eventDate: e.target.value })}
+				selected={selectedDate ? new Date(selectedDate) : null}
+				onChange={handleDateChange}
+				dateFormat="yyyy-MM-dd"
+				customInput={<CustomInput value={selectedDate} />}
 			/>
 			<label>Event Location</label>
 			<input

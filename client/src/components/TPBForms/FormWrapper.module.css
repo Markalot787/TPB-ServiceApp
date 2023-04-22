@@ -1,4 +1,4 @@
-/* FormWrapper.module.css */
+/* components.css */
 .wrapper {
 	padding: 2rem;
 	border: 1px solid #e0e0e0;
@@ -22,6 +22,12 @@
 	display: grid;
 	gap: 1rem 0.5rem;
 	grid-template-columns: auto minmax(auto, 400px);
+}
+
+.container {
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto;
 }
 
 .MultiStepForm {
@@ -116,4 +122,8 @@ input[type='radio']:checked {
 	width: 100%;
 	max-width: 300px;
 	margin-top: 1rem;
+}
+
+.center {
+	text-align: center;
 }

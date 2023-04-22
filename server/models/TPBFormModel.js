@@ -1,6 +1,7 @@
+////server/models/TPBFormModel.js
 const mongoose = require('mongoose');
 
-const formSchema = new mongoose.Schema({
+const TPBformSchema = new mongoose.Schema({
 	clientName: String,
 	clientPhoneNumber: String,
 	clientEmail: String,
@@ -14,8 +15,9 @@ const formSchema = new mongoose.Schema({
 	eventBoothLocation: String,
 	eventBoothTime: String,
 	offer: String,
+	createdAt: { type: Date, default: Date.now },
 });
 
-const Form = mongoose.model('Form', formSchema);
+const TPBForm = mongoose.model('TPBForm', TPBformSchema);
 
-module.exports = Form;
+module.exports = TPBForm;

@@ -31,23 +31,28 @@ const MultiStepForm = ({ steps, handleSubmit }) => {
 	};
 
 	return (
-		<form onSubmit={handleFormSubmit}>
-			<div className={styles.stepContainer}>
-				{steps[currentStep]}
-				<div className={styles.buttonContainer}>
-					<button
-						type="button"
-						onClick={handlePrev}
-						disabled={currentStep === 0}
-					>
-						Previous
-					</button>
-					<button type="submit">
-						{currentStep === steps.length - 1 ? 'Submit' : 'Next'}
-					</button>
-				</div>
+		<div className={styles.wrapper}>
+			<div className={styles.container}>
+				<h2>FormaLink</h2>
+				<form onSubmit={handleFormSubmit}>
+					<div className={styles.stepContainer}>
+						{steps[currentStep]}
+						<div className={styles.buttonContainer}>
+							<button
+								type="button"
+								onClick={handlePrev}
+								disabled={currentStep === 0}
+							>
+								Previous
+							</button>
+							<button type="submit">
+								{currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
-		</form>
+		</div>
 	);
 };
 
